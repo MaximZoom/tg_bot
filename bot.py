@@ -3,7 +3,7 @@ import telebot
 from func import get_translation
 import requests
 from telebot import types
-
+from bs4 import BeautifulSoup
 
 bot = telebot.TeleBot(config.token)
 global l
@@ -122,6 +122,22 @@ def ru(message):
 def de(message):
     
     bot.send_message(message.chat.id, *get_translation(message.text,'de')['text'])      
+
+########################################################## WATER LVL
+
+@bot.message_handler(commands=['wlvl']) 
+def wlvl(message): 
+    url = config.w_lvl_url 
+    page = requests.get(url) 
+    soup = BeautifulSoup(page.text, 'html.parser') 
+    lvl = soup.find_all('b')[2].get_text()
+    if l=='English':
+        bot.send_message(message.chat.id, 'Water level in the Biya river: ' + lvl)
+
+    elif l=='Russian':
+        bot.send_message(message.chat.id, 'Уровень воды в реке Бия: ' + lvl)
+            
+    
 
 ##########################################################
 
