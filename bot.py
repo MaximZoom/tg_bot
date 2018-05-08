@@ -65,9 +65,9 @@ def helps(message):
 @bot.message_handler(commands=['commands'])
 def commands(message):
     if l=='English':
-        bot.send_message(message.chat.id,'Command list: \n 1)/translate \n 2)/language \n 3)/help')
+        bot.send_message(message.chat.id,'Command list: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl')
     elif l=='Russian':
-        bot.send_message(message.chat.id,'Список команд: \n 1)/translate \n 2)/language \n 3)/help')
+        bot.send_message(message.chat.id,'Список команд: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl')
         
 
 ##########################################################  TRANSLATER  
