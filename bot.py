@@ -65,9 +65,9 @@ def helps(message):
 @bot.message_handler(commands=['commands'])
 def commands(message):
     if l=='English':
-        bot.send_message(message.chat.id,'Command list: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl')
+        bot.send_message(message.chat.id,'Command list: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl \n 5)/course')
     elif l=='Russian':
-        bot.send_message(message.chat.id,'Список команд: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl')
+        bot.send_message(message.chat.id,'Список команд: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl \n 5)/course')
         
 
 ##########################################################  TRANSLATER  
@@ -138,6 +138,25 @@ def wlvl(message):
         bot.send_message(message.chat.id, 'Уровень воды в реке Бия: ' + lvl)
             
     
+
+########################################################## COURSE
+
+@bot.message_handler(commands=['course']) 
+def course(message): 
+    url = config.bank 
+    page = requests.get(url) 
+    soup = BeautifulSoup(page.text, 'html.parser') 
+    usd = soup.find_all('td')[3].get_text() 
+    eur = soup.find_all('td')[8].get_text() 
+    url = config.bitcoin 
+    page = requests.get(url) 
+    soup = BeautifulSoup(page.text, 'html.parser') 
+    btc = soup.find_all(class_='pretty-sum')[2].get_text()
+
+    if l=='English':
+        bot.send_message(message.chat.id, 'Courses:\n USD: ' + usd + ' RUB\n EUR: ' + eur + ' RUB\n BTC: ' + btc + ' RUB')
+    elif l=='Russian':
+        bot.send_message(message.chat.id, 'Курсы:\n USD: ' + usd + ' RUB\n EUR: ' + eur + ' RUB\n BTC: ' + btc + ' RUB')    
 
 ##########################################################
 
