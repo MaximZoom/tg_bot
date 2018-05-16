@@ -65,9 +65,9 @@ def helps(message):
 @bot.message_handler(commands=['commands'])
 def commands(message):
     if l=='English':
-        bot.send_message(message.chat.id,'Command list: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl')
+        bot.send_message(message.chat.id,'Command list: \n 1)/translate - translates the entered text  \n 2)/language - changes the language  \n 3)/help - help \n 4)/wlvl -  water level in the Biya river \n 5)/course - course USD EUR BTC in rubles \n 6)/weather - weather in Biysk')
     elif l=='Russian':
-        bot.send_message(message.chat.id,'Список команд: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl')
+         bot.send_message(message.chat.id,'Список команд: \n 1)/translate - переводчик введенного текста  \n 2)/language - смена языка интерфейса  \n 3)/help - помощь \n 4)/wlvl -  уровень воды в реке Бия \n 5)/course - курсы USD EUR BTC к рублю \n 6)/weather - погода в Бийске')
         
 
 ##########################################################  TRANSLATER  
