@@ -65,9 +65,9 @@ def helps(message):
 @bot.message_handler(commands=['commands'])
 def commands(message):
     if l=='English':
-        bot.send_message(message.chat.id,'Command list: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl \n 5)/course')
+        bot.send_message(message.chat.id,'Command list: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl')
     elif l=='Russian':
-        bot.send_message(message.chat.id,'Список команд: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl \n 5)/course')
+        bot.send_message(message.chat.id,'Список команд: \n 1)/translate \n 2)/language \n 3)/help \n 4)/wlvl')
         
 
 ##########################################################  TRANSLATER  
@@ -139,25 +139,24 @@ def wlvl(message):
             
     
 
-########################################################## COURSE
+########################################################## WEATHER
 
-@bot.message_handler(commands=['course']) 
-def course(message): 
-    url = config.bank 
+@bot.message_handler(commands=['weather']) 
+def weather(message): 
+    url = config.weather 
     page = requests.get(url) 
     soup = BeautifulSoup(page.text, 'html.parser') 
-    usd = soup.find_all('td')[3].get_text() 
-    eur = soup.find_all('td')[8].get_text() 
-    url = config.bitcoin 
-    page = requests.get(url) 
-    soup = BeautifulSoup(page.text, 'html.parser') 
-    btc = soup.find_all(class_='pretty-sum')[2].get_text()
+    state = soup.find_all(class_='today_nowcard-phrase')[0].get_text() 
+    temp = soup.find_all(class_='today_nowcard-temp')[0].get_text() 
+    feels = soup.find_all(class_='deg-feels')[0].get_text() 
+    wind = soup.find_all('td')[0].get_text() 
+    wet = soup.find_all('td')[1].get_text()
 
     if l=='English':
-        bot.send_message(message.chat.id, 'Courses:\n USD: ' + usd + ' RUB\n EUR: ' + eur + ' RUB\n BTC: ' + btc + ' RUB')
+        bot.send_message(message.chat.id, 'Current weather condition:\n Temperature: ' + temp + '\n State: ' + state + '\n By sensation: ' + feels + '\n Wind: ' + wind + '\n Wet: ' + wet)
+
     elif l=='Russian':
-        bot.send_message(message.chat.id, 'Курсы:\n USD: ' + usd + ' RUB\n EUR: ' + eur + ' RUB\n BTC: ' + btc + ' RUB')    
+         bot.send_message(message.chat.id, 'Текущее состояние погоды:\n Температура: ' + temp + '\n Состояние: ' + state + '\n По ощущениям: ' + feels + '\n Ветер: ' + wind + '\n Влажность: ' + wet)
 
 ##########################################################
-
 bot.polling(none_stop=True)
