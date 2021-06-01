@@ -17,7 +17,7 @@ pyTelegramBotAPI==3.6.2
 pytz==2018.4
 requests==2.18.4
 six==1.11.0
-urllib3==1.22
+urllib3==1.26.5
 virtualenv==15.2.0
 vk-api==9.3
 wrapt==1.10.11
